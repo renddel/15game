@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/custom.css">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/custom.js"></script>
+    </head>
+    <body>
+        <h1>Game</h1>
+        <table style="width:30%" border="1">
+            <tr th:each="row: ${items}">
+                <td th:each="item: ${row}">
+                    <div th:switch="${item} != -1">
+                        <span th:case="${true}" th:text="${item}"></span>
+                        <span th:case="*"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <form id="moveForm" th:action="@{'/game/' + ${gameId} + '/move/'}" th:object="${moveForm}" method="post">
+            <label for="move">Insert your move </label>
+            <input id="textField" type="number" name="tileValue" autofocus="autofocus">
+            <input type="submit" value="Make move" onclick="myFunction()">
+        </form> 
+    </body>
+</html>
